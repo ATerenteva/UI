@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class InfoPage {
+public class InfoBlock {
 
     WebDriver driver;
 
@@ -21,7 +21,7 @@ public class InfoPage {
     @FindBy(xpath = "//a[contains(@href, \"/information#company\")]")
     WebElement infoAboutCompany;
 
-    public InfoPage(WebDriver driver){
+    public InfoBlock(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

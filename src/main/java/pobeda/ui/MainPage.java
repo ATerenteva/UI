@@ -18,6 +18,9 @@ public class MainPage {
     @FindBy(xpath = "//a[contains(@href, \"/information\")]/div[contains(text(), \"Информация\")]")
     WebElement infoButton;
 
+    @FindBy(className = "dp-72lm4u")
+    WebElement FindTicketBlock;
+
     public MainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -32,8 +35,17 @@ public class MainPage {
         return logo;
     }
 
+    public WebElement getFindTicketBlock() {
+        return FindTicketBlock;
+    }
+
     public void pointToInfo(){
         Actions builder = new Actions(driver);
         builder.moveToElement(infoButton).perform();
+    }
+
+    public void scrollToFindTicket(){
+        Actions builder = new Actions(driver);
+        builder.moveToElement(FindTicketBlock).perform();
     }
 }
