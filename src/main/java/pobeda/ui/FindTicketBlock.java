@@ -47,8 +47,7 @@ public class FindTicketBlock {
         return dateBackField;
     }
 
-    public void clickWhereFromField(){ whereFromField.click();
-    }
+    public void clickWhereFromField(){ whereFromField.click(); }
 
     public void clickWhereField(){
         whereField.click();

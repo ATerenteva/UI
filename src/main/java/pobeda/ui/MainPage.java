@@ -12,6 +12,11 @@ public class MainPage {
 
     String title;
 
+    Actions builder;
+
+    @FindBy(className = "dp-5wtb64")
+    WebElement popUp;
+
     @FindBy(xpath = "//div[contains(@class, \"dp-2ri4z4\")]/a[contains(@class, \"dp-oz7gu4\")]/img[contains(@alt, \"«Авиакомпания «Победа», Группа «Аэрофлот»\")]")
     WebElement logo;
 
@@ -21,10 +26,22 @@ public class MainPage {
     @FindBy(className = "dp-72lm4u")
     WebElement FindTicketBlock;
 
+    @FindBy(xpath = "//a[contains(@href, \"/services/booking-management\")]/div")
+    WebElement bookingManagment;
+
     public MainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
         this.title = driver.getTitle();
+        this.builder = new Actions(this.driver);
+    }
+
+    public WebElement getPopUp() {
+        return popUp;
+    }
+
+    public void closePopUpWindow(){
+        popUp.click();
     }
 
     public String getTitle() {
@@ -40,12 +57,18 @@ public class MainPage {
     }
 
     public void pointToInfo(){
-        Actions builder = new Actions(driver);
         builder.moveToElement(infoButton).perform();
     }
 
     public void scrollToFindTicket(){
-        Actions builder = new Actions(driver);
         builder.moveToElement(FindTicketBlock).perform();
+    }
+
+    public void scrollToBookingManagment(){
+        builder.moveToElement(bookingManagment).perform();
+    }
+
+    public void clickBookingManagment(){
+        bookingManagment.click();
     }
 }

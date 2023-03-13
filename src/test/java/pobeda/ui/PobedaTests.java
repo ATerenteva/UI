@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class PobedaTests {
 
@@ -21,6 +22,7 @@ public class PobedaTests {
     MainPage objMain;
     InfoBlock objInfo;
     FindTicketBlock objTicket;
+    BookingPage objBooking;
 
     @BeforeEach
     public void before(){
@@ -30,6 +32,7 @@ public class PobedaTests {
 
         objMain = new MainPage(driver);
 
+        if(objMain.getPopUp().isDisplayed()) objMain.closePopUpWindow();
         Assert.assertEquals(objMain.getTitle(), "Авиакомпания «Победа» - купить билеты на самолёт дешево онлайн, прямые и трансферные рейсы");
         Assert.assertTrue(objMain.getLogo().isDisplayed());
     }
@@ -66,6 +69,28 @@ public class PobedaTests {
         objTicket.clickFindButton();
 
         Assert.assertEquals(objTicket.getDateThereField().getCssValue("color"), "rgba(185, 0, 85, 1)");
+    }
+
+    @Test
+    public void checkBookingPage(){
+        objMain.scrollToBookingManagment();
+        objMain.clickBookingManagment();
+
+        objBooking = new BookingPage(driver);
+        Assert.assertTrue(objBooking.getOrderNumber().isEnabled());
+        Assert.assertTrue(objBooking.getClientsName().isEnabled());
+        Assert.assertTrue(objBooking.getFindButton().isDisplayed());
+
+        objBooking.clickOrderNumber();
+        objBooking.getOrderNumber().sendKeys("XXXXXX");
+        objBooking.clickClientsName();
+        objBooking.getClientsName().sendKeys("Qwerty");
+        objBooking.clickFindButton();
+
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(newTab.get(1));
+        Assert.assertEquals(driver.getCurrentUrl(), "https://ticket.pobeda.aero/websky/?lang=ru#/search-order/XXXXXX/Qwerty");
+        Assert.assertEquals(objBooking.getMessageError().getText(), "Заказ с указанными параметрами не найден");
     }
 
     @AfterEach
