@@ -1,42 +1,31 @@
 package pobeda.ui;
 
+
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class MainPage {
-    WebDriver driver;
 
     String title;
 
-    Actions builder;
+    private SelenideElement popUp =  $(By.className("dp-5wtb64"));
 
-    @FindBy(className = "dp-5wtb64")
-    WebElement popUp;
+    private SelenideElement logo = $(By.xpath("//div[contains(@class, \"dp-2ri4z4\")]/a[contains(@class, \"dp-oz7gu4\")]/img[contains(@alt, \"«Авиакомпания «Победа», Группа «Аэрофлот»\")]"));
 
-    @FindBy(xpath = "//div[contains(@class, \"dp-2ri4z4\")]/a[contains(@class, \"dp-oz7gu4\")]/img[contains(@alt, \"«Авиакомпания «Победа», Группа «Аэрофлот»\")]")
-    WebElement logo;
+    private SelenideElement infoButton = $(By.xpath("//a[contains(@href, \"/information\")]/div[contains(text(), \"Информация\")]"));
 
-    @FindBy(xpath = "//a[contains(@href, \"/information\")]/div[contains(text(), \"Информация\")]")
-    WebElement infoButton;
+    private SelenideElement FindTicketBlock = $(By.className("dp-72lm4u"));
 
-    @FindBy(className = "dp-72lm4u")
-    WebElement FindTicketBlock;
+    private SelenideElement bookingManagment = $(By.xpath("//a[contains(@href, \"/services/booking-management\")]/div"));
 
-    @FindBy(xpath = "//a[contains(@href, \"/services/booking-management\")]/div")
-    WebElement bookingManagment;
-
-    public MainPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        this.title = driver.getTitle();
-        this.builder = new Actions(this.driver);
+    public MainPage(){
+        this.title = Selenide.title();
     }
 
-    public WebElement getPopUp() {
+    public SelenideElement getPopUp() {
         return popUp;
     }
 
@@ -48,24 +37,24 @@ public class MainPage {
         return this.title;
     }
 
-    public WebElement getLogo() {
+    public SelenideElement getLogo() {
         return logo;
     }
 
-    public WebElement getFindTicketBlock() {
+    public SelenideElement getFindTicketBlock() {
         return FindTicketBlock;
     }
 
     public void pointToInfo(){
-        builder.moveToElement(infoButton).perform();
+        infoButton.hover();
     }
 
     public void scrollToFindTicket(){
-        builder.moveToElement(FindTicketBlock).perform();
+        FindTicketBlock.hover();
     }
 
     public void scrollToBookingManagment(){
-        builder.moveToElement(bookingManagment).perform();
+        bookingManagment.hover();
     }
 
     public void clickBookingManagment(){

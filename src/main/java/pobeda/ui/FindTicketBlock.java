@@ -1,49 +1,37 @@
 package pobeda.ui;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class FindTicketBlock {
 
-    WebDriver driver;
+    private SelenideElement whereFromField = $(By.id("mantine-R2qualmqm-target"));
 
-    @FindBy(id = "mantine-R2qualmqm-target")
-    WebElement whereFromField;
+    private SelenideElement whereField = $(By.id("mantine-R3qualmqm-target"));
 
-    @FindBy(id = "mantine-R3qualmqm-target")
-    WebElement whereField;
+    private SelenideElement dateThereField = $(By.id(":Rbcualmqm:"));
 
-    @FindBy(id = ":Rbcualmqm:")
-    WebElement dateThereField;
+    private SelenideElement dateBackField = $(By.id(":Rrcualmqm:"));
 
-    @FindBy(id = ":Rrcualmqm:")
-    WebElement dateBackField;
-
-    @FindBy(xpath = "//button[contains(@class, \"dp-n39zqv\")]")
-    WebElement findButton;
+    private SelenideElement findButton = $(By.xpath("//button[contains(@class, \"dp-n39zqv\")]"));
 
 
-    public FindTicketBlock(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public WebElement getWhereFromField() {
+    public SelenideElement getWhereFromField() {
         return whereFromField;
     }
 
-    public WebElement getWhereField() {
+    public SelenideElement getWhereField() {
         return whereField;
     }
 
-    public WebElement getDateThereField() {
+    public SelenideElement getDateThereField() {
         return dateThereField;
     }
 
-    public WebElement getDateBackField() {
+    public SelenideElement getDateBackField() {
         return dateBackField;
     }
 

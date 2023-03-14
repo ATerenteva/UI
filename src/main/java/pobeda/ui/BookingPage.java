@@ -1,40 +1,31 @@
 package pobeda.ui;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+
 
 public class BookingPage {
 
-    WebDriver driver;
+    private SelenideElement orderNumber = $(By.id(":r4:"));
 
-    @FindBy(id = ":r4:")
-    WebElement orderNumber;
+    private SelenideElement clientsName = $(By.id(":r3:"));
 
-    @FindBy(id = ":r3:")
-    WebElement clientsName;
+    private SelenideElement findButton = $(By.xpath("//div[contains(text(), \"Поиск\")]"));
 
-    @FindBy(xpath = "//div[contains(text(), \"Поиск\")]")
-    WebElement findButton;
+    private SelenideElement messageError = $(By.className("message_error"));
 
-    @FindBy(className = "message_error")
-    WebElement messageError;
 
-    public BookingPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public WebElement getOrderNumber() {
+    public SelenideElement getOrderNumber() {
         return orderNumber;
     }
 
-    public WebElement getClientsName() {
+    public SelenideElement getClientsName() {
         return clientsName;
     }
 
-    public WebElement getFindButton() {
+    public SelenideElement getFindButton() {
         return findButton;
     }
 
@@ -50,7 +41,7 @@ public class BookingPage {
         findButton.click();
     }
 
-    public WebElement getMessageError() {
+    public SelenideElement getMessageError() {
         return messageError;
     }
 }

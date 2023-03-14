@@ -1,44 +1,34 @@
 package pobeda.ui;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class InfoBlock {
 
-    WebDriver driver;
+    private SelenideElement infoWindow = $(By.xpath("//div[contains(@class, \"dp-1s9wcw1\")]"));
 
-    @FindBy(xpath = "//div[contains(@class, \"dp-1s9wcw1\")]")
-    WebElement infoWindow;
+    private SelenideElement infoTitleReadyToFly = $(By.xpath("//div[contains(text(), \"Подготовка к полёту\")]"));
 
-    @FindBy(xpath = "//div[contains(text(), \"Подготовка к полёту\")]")
-    WebElement infoTitleReadyToFly;
+    private SelenideElement infoUsefulInfo = $(By.xpath("//div[contains(text(), \"Полезная информация\")]"));
 
-    @FindBy(xpath = "//div[contains(text(), \"Полезная информация\")]")
-    WebElement infoUsefulInfo;
+    private SelenideElement infoAboutCompany = $(By.xpath("//a[contains(@href, \"/information#company\")]"));
 
-    @FindBy(xpath = "//a[contains(@href, \"/information#company\")]")
-    WebElement infoAboutCompany;
-
-    public InfoBlock(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public WebElement getInfoWindow() {
+    public SelenideElement getInfoWindow() {
         return infoWindow;
     }
 
-    public WebElement getInfoTitleReadyToFly() {
+    public SelenideElement getInfoTitleReadyToFly() {
         return infoTitleReadyToFly;
     }
 
-    public WebElement getInfoUsefulInfo() {
+    public SelenideElement getInfoUsefulInfo() {
         return infoUsefulInfo;
     }
 
-    public WebElement getInfoAboutCompany() {
+    public SelenideElement getInfoAboutCompany() {
         return infoAboutCompany;
     }
 }
